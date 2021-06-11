@@ -1,5 +1,3 @@
-# Three.js Journey
-
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
 Run this followed commands:
@@ -16,7 +14,7 @@ npm run build
 ```
 
 ## TODO
-Add eslint
-Add typescript
-Filter and update dependencies
+* Add eslint
+* Add typescript
+* Filter and update dependencies
 
