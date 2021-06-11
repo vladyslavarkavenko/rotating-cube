@@ -14,7 +14,7 @@ npm run build
 ```
 
 ## TODO
-* Add eslint
+* Add eslint (on pre-commit too)
 * Add typescript
 * Filter and update dependencies
 
