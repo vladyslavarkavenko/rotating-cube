@@ -1,7 +1,8 @@
-import { loadBirds } from './components/birds/birds.js';
+import { loadBackground } from './components/background/background.js';
 import { createCamera } from './components/camera.js';
 import { createLights } from './components/lights.js';
 import { createScene } from './components/scene.js';
+import {loadAxesHelper} from "./components/axesHelper/axesHelper";
 
 import { createControls } from './systems/controls.js';
 import { createRenderer } from './systems/renderer.js';
@@ -26,19 +27,17 @@ class World {
     this.#controls = createControls(this.#camera, this.#renderer.domElement);
     this.#loop.updatables.push(this.#controls);
 
-    const { ambientLight, mainLight } = createLights();
-    this.#scene.add(ambientLight, mainLight);
+    const { pointLight1, pointLight2, pointLight1Helper, pointLight2Helper } = createLights();
+    this.#scene.add(pointLight1, pointLight2, pointLight1Helper, pointLight2Helper);
 
     new Resizer(container, this.#camera, this.#renderer);
   }
 
   async init() {
-    const { parrot, flamingo, stork } = await loadBirds();
+    const background = loadBackground();
+    const axesHelper = loadAxesHelper();
 
-    this.#controls.target.copy(parrot.position);
-
-    this.#loop.updatables.push(parrot, flamingo, stork);
-    this.#scene.add(parrot, flamingo, stork);
+    this.#scene.add(background, axesHelper);
   }
 
   render() {
