@@ -20,7 +20,7 @@ const sliceParams = {
 const setupGuiForSliceCube = (sliceCube, sliceCubeParams, folderName = "Slice cube") => {
     const slicedCubeFolder = gui.addFolder(folderName)
 
-    slicedCubeFolder.add(sliceCubeParams, "sliceCount", 0, 100);
+    // slicedCubeFolder.add(sliceCubeParams, "sliceCount", 0, 100);
     slicedCubeFolder.add(sliceCubeParams, "animationSpeed", 0, 10);
 }
 
@@ -111,7 +111,7 @@ function loadSlicedCube() {
     }
 
     setupGuiForSliceCube(sliceCube, sliceCubeParams);
-    setupGuiForSlice(sliceGeometry, sliceMaterial, sliceParams, { roughnessMap });
+    // setupGuiForSlice(sliceGeometry, sliceMaterial, sliceParams, { roughnessMap });
 
     return sliceCube;
 }
