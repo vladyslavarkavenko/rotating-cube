@@ -8,7 +8,8 @@ const backgroundParams = {
     metalness: 0.25,
     x: 0,
     y: 0,
-    z: 0
+    z: 0,
+    animationSpeed: 1
 };
 
 const setupGuiForBackground = (background, backgroundParams, folderName = "Background") => {
@@ -35,6 +36,9 @@ const setupGuiForBackground = (background, backgroundParams, folderName = "Backg
     backgroundFolder.add(backgroundParams, "z", -300, 300, 1).onChange(() => {
         background.position.z = backgroundParams.z;
     });
+
+    // Animation
+    backgroundFolder.add(backgroundParams, "animationSpeed", 1, 10);
 }
 
 function loadBackground() {
@@ -49,6 +53,11 @@ function loadBackground() {
 
     const background = new Mesh(geometry, material);
     background.position.set(backgroundParams.x, backgroundParams.y, backgroundParams.z);
+
+    background.tick = (event) => {
+        const rotationCoefficient = event.elapsedTime * 0.1 * backgroundParams.animationSpeed;
+        background.rotation.set(rotationCoefficient, rotationCoefficient, rotationCoefficient);
+    }
 
     setupGuiForBackground(background, backgroundParams)
 
