@@ -1,8 +1,9 @@
 import { loadBackground } from './components/background/background.js';
+import { loadSlicedCube } from './components/slicedCube/slicedCube.js';
 import { createCamera } from './components/camera.js';
 import { createLights } from './components/lights.js';
 import { createScene } from './components/scene.js';
-import {loadAxesHelper} from "./components/axesHelper/axesHelper";
+import { loadAxesHelper } from "./components/axesHelper/axesHelper";
 
 import { createControls } from './systems/controls.js';
 import { createRenderer } from './systems/renderer.js';
@@ -35,9 +36,11 @@ class World {
 
   async init() {
     const background = loadBackground();
+    const slicedCube = loadSlicedCube();
     const axesHelper = loadAxesHelper();
 
-    this.#scene.add(background, axesHelper);
+    this.#scene.add(background, slicedCube, axesHelper);
+    this.#loop.updatables.push(slicedCube);
   }
 
   render() {

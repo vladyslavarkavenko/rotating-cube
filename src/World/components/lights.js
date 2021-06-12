@@ -4,7 +4,7 @@ import {gui} from "../systems/gui";
 
 const pointLight1Params = {
   color: 0xE7F7ED,
-  intensity: 1.5,
+  intensity: 5,
   distance: 1000,
   decay: 2,
   x: 300,
