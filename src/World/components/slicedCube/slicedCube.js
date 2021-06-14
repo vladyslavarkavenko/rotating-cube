@@ -25,7 +25,11 @@ const setupGuiForSliceCube = (sliceCube, sliceCubeParams, sliceParams, folderNam
     slicedCubeFolder.add(sliceCubeParams, "sliceCount", 0, 100).onChange(() => {
         sliceCube.recreateSlices(sliceCubeParams, sliceParams);
     });
-    slicedCubeFolder.add(sliceCubeParams, "animationSpeed", 0, 10);
+    slicedCubeFolder
+        .add({ animationSpeed: sliceCubeParams.animationSpeed }, "animationSpeed", 0, 10)
+        .onFinishChange((animationSpeed) => {
+            sliceCubeParams.animationSpeed = animationSpeed;
+        });
 }
 
 const setupGuiForSlices = (sliceCube, sliceCubeParams, sliceParams, textures, folderName = "Slice") => {
@@ -104,7 +108,11 @@ function loadSlicedCube() {
     const createSlices = (sliceCubeParams, sliceParams) => {
         const halfHeightOfCube = sliceParams.height * sliceCubeParams.sliceCount / 2;
 
-        // Remove all old children
+        // Remove all old children data
+        sliceCube.children.forEach(slice => {
+            slice.geometry.dispose();
+            slice.material.dispose();
+        })
         sliceCube.remove(...sliceCube.children);
 
         // Create new children
